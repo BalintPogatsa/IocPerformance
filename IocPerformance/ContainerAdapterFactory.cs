@@ -11,9 +11,16 @@ namespace IocPerformance
         {
             yield return new NoContainerAdapter();
 
+            // TODO: remove if all IoC adapters should be compared
+            var selectedAdapters = new Type[] {
+                typeof(VSMefContainerAdapter),
+                typeof(Mef2ContainerAdapter)
+              };
+
             var containers = typeof(ContainerAdapterFactory).Assembly.GetTypes()
                  .Where(t => t.IsClass && !t.IsAbstract && t.GetInterfaces().Contains(typeof(IContainerAdapter)))
                  .Where(t => !t.Equals(typeof(NoContainerAdapter)))
+                 .Where(t => selectedAdapters.Contains(t))
                  .Select(t => Activator.CreateInstance(t))
                  .Cast<IContainerAdapter>()
                  .OrderBy(c => c.Name);

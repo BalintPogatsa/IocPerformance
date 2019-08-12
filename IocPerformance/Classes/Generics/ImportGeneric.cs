@@ -4,7 +4,7 @@ using System.ComponentModel.Composition;
 
 namespace IocPerformance.Classes.Generics
 {
-    [Export(typeof(ImportGeneric<>)), PartCreationPolicy(CreationPolicy.NonShared)]
+    //[Export(typeof(ImportGeneric<>)), PartCreationPolicy(CreationPolicy.NonShared)]
     [System.Composition.Export(typeof(ImportGeneric<>))]
     public class ImportGeneric<T>
     {
